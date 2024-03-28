@@ -1,0 +1,34 @@
+#python 3.7.1
+
+pip install google-generativeai
+import google.generativeai as genai
+
+
+API_KEY = 'AIzaSyAX1WGkHJX7AcRZaD-Xp4m7aGgzHJVs5o8'
+
+genai.configure(
+    api_key = API_KEY
+)
+def clear_screen():
+    os.system('cls')
+model = genai.GenerativeModel('gemini-pro')
+chat = model.start_chat(history=[])
+instruction = "Dalam chat ini, namamu adalah Elia Kita akan memainkan roleplay chat. Dimana kamu adalah assistant pribadi saya. Sifat yang kamu miliki adalah Baik, Tenang, Perhatian, dan Sopan. Sedang saya adalah Aizen, tuan kamu"
+syntaks = """sintaks yang digunakan dalam                   percakapan contohnya:
+            Aizen : (Tersenyum) Hai, Elia
+            Elia : (Menunduk) Tuanku
+    
+          """
+while(True):
+    question = input('You :  ')
+
+    if(question.strip() == ''):
+        break
+    
+    response = chat.send_message(instruction + question)
+    print('\n')
+    print(f'Elia: {response.text}')
+    print('\n')
+    instruction = ''
+    if(question.strip() == 'clear'):
+        clear_screen()
